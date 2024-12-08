@@ -1,0 +1,201 @@
+.colorWeak {
+  filter: invert(80%);
+}
+.ant-layout {
+  min-height: 100vh;
+}
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+canvas {
+  display: block;
+}
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ul,
+ol {
+  list-style: none;
+}
+.ant-pro-global-header-header-actions-avatar > div:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+.ant-pro-global-header-logo img,
+.ant-pro-sider-collapsed-button {
+  display: none;
+}
+.ant-pro-global-header-logo h1 {
+  color: white;
+  margin-inline-start: 0;
+  font-size: 30px;
+}
+.ant-pro-global-header {
+  margin-inline: 0;
+}
+.ant-pro-global-header-logo-mix {
+  justify-content: center;
+}
+.ant-pro-global-header-logo {
+  background-color: #181818 !important;
+  height: 100%;
+  flex: 0 0 256px;
+  max-width: 256px;
+  min-width: 256px;
+  width: 256px;
+  border-bottom: 1px solid #383838;
+}
+.ant-layout-sider {
+  background-color: #181818 !important;
+}
+.ant-menu-item,
+.ant-menu-submenu > .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+.ant-menu-submenu-selected,
+.ant-menu-item-selected,
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title,
+:where(.css-dev-only-do-not-override-r8r2vx) > a:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1sbcj8n).ant-menu-light > .ant-menu .ant-menu-item-selected {
+  background: #0052d9 !important;
+}
+.ant-pro-layout .ant-pro-layout-content {
+  background: #f3f3f3;
+  padding-block: 10px;
+  padding-inline: 20px;
+  flex: 1;
+}
+.ant-pro-layout .ant-layout {
+  height: 100vh;
+}
+.contentBox {
+  height: 100%;
+  background: #fff;
+  padding: 25px 25px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+.searchForm {
+  min-height: 32px;
+}
+.tableMarginTop {
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+.ant-layout-footer {
+  padding: 0px;
+  background: none;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-layout-footer > .ant-pro-global-footer {
+  padding: 0;
+  margin: 0;
+}
+.inerTableBox {
+  overflow: auto;
+}
+.PTabs .ant-tabs-nav {
+  background: #fff;
+  padding-left: 20px;
+  border-radius: 8px;
+}
+.searchButton {
+  background: #2151d1;
+  color: #fff;
+}
+.searchButton:hover {
+  color: #fff !important;
+  background: #2151d1 !important;
+  border-color: transparent !important;
+}
+.resetButton {
+  background: #e7e7e7;
+  margin-left: 10px;
+}
+.resetButton:hover {
+  color: #000 !important;
+  background: #e7e7e7 !important;
+  border-color: #e7e7e7 !important;
+}
+.ant-pro-layout-content {
+  overflow: auto;
+}
+.Pdescriptions .ant-descriptions-item-label {
+  width: 50%;
+}
+.Pdescriptions .ant-descriptions-item-label::after {
+  content: '';
+}
+.Pdescriptions .ant-descriptions-title {
+  font-size: 20px;
+  font-weight: normal;
+}
+.extraAction {
+  padding: 5px 16px;
+  border: 1px solid #0052d9;
+  border-radius: 3px;
+}
+.ant-pro-sider-actions {
+  visibility: hidden;
+}
+.ant-modal-body .ant-form {
+  margin-top: 25px;
+}
+.noPaginationTable .ant-pagination {
+  display: none;
+}
+.tinyForm .ant-form-item-label {
+  flex: 0 0 23.333333%;
+}
+:where(.css-dev-only-do-not-override-r8r2vx).ant-modal .ant-modal-close:hover {
+  background-color: transparent;
+}
+/* 移除水波纹效果 */
+.ant-btn {
+  overflow: hidden;
+}
+.opcityLabel .ant-form-item-label {
+  opacity: 0;
+}
+.logoUpload .ant-upload-select {
+  height: 22px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+@media (max-width: 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > th,
+  .ant-table-thead > tr > td,
+  .ant-table-tbody > tr > td {
+    white-space: pre;
+  }
+  .ant-table-thead > tr > th > span,
+  .ant-table-tbody > tr > th > span,
+  .ant-table-thead > tr > td > span,
+  .ant-table-tbody > tr > td > span {
+    display: block;
+  }
+}
+.ellipsis-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* 限制显示三行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}

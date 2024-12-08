@@ -1,0 +1,289 @@
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+//右上角头像hover设置
+.ant-pro-global-header-header-actions-avatar>div:hover {
+  background-color: rgba(0, 0, 0, 0)
+}
+
+.ant-pro-global-header-logo img,
+.ant-pro-sider-collapsed-button {
+  display: none;
+}
+
+//logo样式
+.ant-pro-global-header-logo h1 {
+  color: white;
+  margin-inline-start: 0;
+  font-size: 30px;
+}
+
+.ant-pro-global-header {
+  margin-inline: 0;
+}
+
+.ant-pro-global-header-logo-mix {
+  justify-content: center;
+}
+
+.ant-pro-global-header-logo {
+  background-color: rgb(24, 24, 24) !important;
+  height: 100%;
+  flex: 0 0 256px;
+  max-width: 256px;
+  min-width: 256px;
+  width: 256px;
+  border-bottom: 1px solid #383838;
+
+}
+
+//左侧菜单栏样式
+.ant-layout-sider {
+  background-color: rgb(24, 24, 24) !important;
+
+}
+
+.ant-menu-item,
+.ant-menu-submenu>.ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.ant-menu-submenu-selected,
+.ant-menu-item-selected,
+.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title,
+:where(.css-dev-only-do-not-override-r8r2vx)>a:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1sbcj8n).ant-menu-light>.ant-menu .ant-menu-item-selected {
+  background: rgba(0, 82, 217, 1) !important;
+
+}
+
+//中间内容设置
+.ant-pro-layout .ant-pro-layout-content {
+  background: rgb(243, 243, 243);
+  padding-block: 10px;
+  padding-inline: 20px;
+  flex: 1;
+  // height: 87vh;
+  // overflow: auto;
+
+}
+
+.ant-pro-layout .ant-layout {
+  height: 100vh;
+}
+
+// 中间content样式 中间自适应
+.contentBox {
+  height: 100%;
+  background: #fff;
+  padding: 25px 25px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+.searchForm {
+  min-height: 32px;
+}
+
+.tableMarginTop {
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+//footer设置
+.ant-layout-footer {
+  padding: 0px;
+  background: none;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &>.ant-pro-global-footer {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.inerTableBox {
+  // height: 28.2vh;
+  overflow: auto;
+}
+
+// 全局tabs样式
+.PTabs {
+  .ant-tabs-nav {
+    background: #fff;
+    padding-left: 20px;
+    border-radius: 8px;
+  }
+}
+
+//全局的 search reset按钮样式
+.searchButton {
+  background: #2151d1;
+  color: #fff;
+
+  &:hover {
+    color: #fff !important;
+    background: #2151d1 !important;
+    border-color: transparent !important
+  }
+}
+
+.resetButton {
+  background: #e7e7e7;
+  margin-left: 10px;
+
+  &:hover {
+    color: #000 !important;
+    background: #e7e7e7 !important;
+    border-color: #e7e7e7 !important
+  }
+}
+
+.ant-pro-layout-content {
+  overflow: auto;
+}
+
+// .tableMarginTop {
+//   margin-top: 25px;
+// }
+
+.Pdescriptions {
+  .ant-descriptions-item-label {
+    width: 50%;
+
+    &::after {
+      content: '';
+    }
+  }
+
+  .ant-descriptions-title {
+    font-size: 20px;
+    font-weight: normal;
+  }
+}
+
+.extraAction {
+  padding: 5px 16px;
+  border: 1px solid #0052d9;
+  border-radius: 3px;
+}
+
+//隐藏 左侧spin效果
+.ant-pro-sider-actions {
+  visibility: hidden;
+}
+
+
+
+.ant-modal-body {
+  .ant-form {
+    margin-top: 25px;
+  }
+}
+
+
+
+.noPaginationTable {
+  .ant-pagination {
+    display: none;
+  }
+}
+
+.tinyForm {
+
+  // .ant-form-item-row {
+  //   flex-direction: column;
+  // }
+  .ant-form-item-label {
+    flex: 0 0 23.333333%;
+  }
+}
+
+//全局弹窗close 按钮的样式调整
+:where(.css-dev-only-do-not-override-r8r2vx).ant-modal .ant-modal-close:hover {
+  background-color: transparent
+}
+
+
+/* 移除水波纹效果 */
+.ant-btn {
+  overflow: hidden;
+}
+
+.opcityLabel {
+  .ant-form-item-label {
+    opacity: 0;
+  }
+}
+
+.logoUpload {
+  .ant-upload-select {
+    height: 22px !important;
+    background-color: transparent !important;
+    border: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+
+    &-thead>tr,
+    &-tbody>tr {
+
+      >th,
+      >td {
+        white-space: pre;
+
+        >span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.ellipsis-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* 限制显示三行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
