@@ -1,0 +1,110 @@
+@primary-color: #1e90ff;
+@background-color: #141625;
+@form-background: #ffffff; // 更亮的表单背景色
+@input-background: #f7f9fc; // 更亮的输入框背景色
+@button-background: #1e90ff;
+@button-hover: #1c86ee;
+@text-color: #333333;
+@placeholder-color: #888888;
+
+.login-container {
+    height: 100vh;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    background-color: @background-color;
+    background: @background-color url('https://source.unsplash.com/random/1920x1080') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.title-box {
+    font-size: 45px;
+    font-weight: bold;
+    color: @input-background;
+    text-align: center;
+    border-radius: 20px;
+    margin: 100px auto;
+    background-color: @button-background;
+    padding: 10px 30px;
+    width: 350px;
+}
+
+.login-box {
+    background: @form-background;
+    margin: 125px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+
+.login-title {
+    color: @primary-color;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    color: @text-color;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.login-input {
+    background-color: @input-background;
+    border: 1px solid @placeholder-color;
+    color: @text-color;
+
+    &:focus,
+    &:hover {
+        border-color: @primary-color;
+        box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+    }
+
+    &::placeholder {
+        color: @placeholder-color;
+    }
+}
+
+.login-button {
+    width: 100%;
+    background: @button-background;
+    border: none;
+    color: @form-background;
+    font-weight: bold;
+    transition: background 0.3s ease;
+
+    &:hover,
+    &:focus {
+        background: @button-hover;
+    }
+}
+
+.forgot-password {
+    color: @primary-color;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    .icon {
+        color: @placeholder-color;
+        font-size: 20px;
+        margin: 0 10px;
+        cursor: pointer;
+
+        &:hover {
+            color: @primary-color;
+        }
+    }
+}

@@ -43,20 +43,21 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
-    await outLogin();
-    const { search, pathname } = window.location;
-    const urlParams = new URL(window.location.href).searchParams;
-    /** 此方法会跳转到 redirect 参数所在的位置 */
-    const redirect = urlParams.get('redirect');
-    // Note: There may be security issues, please note
-    if (window.location.pathname !== '/user/login' && !redirect) {
-      history.replace({
-        pathname: '/user/login',
-        search: stringify({
-          redirect: pathname + search,
-        }),
-      });
-    }
+    history.push('/');
+    // await outLogin();
+    // const { search, pathname } = window.location;
+    // const urlParams = new URL(window.location.href).searchParams;
+    // /** 此方法会跳转到 redirect 参数所在的位置 */
+    // const redirect = urlParams.get('redirect');
+    // // Note: There may be security issues, please note
+    // if (window.location.pathname !== '#/user/login' && !redirect) {
+    //   history.replace({
+    //     pathname: '/#/user/login',
+    //     search: stringify({
+    //       redirect: pathname + search,
+    //     }),
+    //   });
+    // }
   };
   const { styles } = useStyles();
 
@@ -69,6 +70,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
         flushSync(() => {
           setInitialState((s) => ({ ...s, currentUser: undefined }));
         });
+        localStorage.removeItem('UserInfo');
+        localStorage.removeItem('permissions');
         loginOut();
         return;
       }
@@ -102,25 +105,25 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
   const menuItems = [
     ...(menu
       ? [
-          {
-            key: 'center',
-            icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
-          },
-          {
-            type: 'divider' as const,
-          },
-        ]
+        {
+          key: 'center',
+          icon: <UserOutlined />,
+          label: '个人中心',
+        },
+        {
+          key: 'settings',
+          icon: <SettingOutlined />,
+          label: '个人设置',
+        },
+        {
+          type: 'divider' as const,
+        },
+      ]
       : []),
     {
       key: 'logout',
       icon: <LogoutOutlined />,
-      label: '退出登录',
+      label: 'Log Out',
     },
   ];
 

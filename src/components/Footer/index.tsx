@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright="Copyright @2024 Mapel Search."
+      copyright="Admin Panel © 2025"
     // links={[
     //   {
     //     key: 'Ant Design Pro',

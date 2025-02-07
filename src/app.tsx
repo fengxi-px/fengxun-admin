@@ -7,50 +7,78 @@ import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getLoginInfo } from './utils/userInfo';
+import { getMenuList, initPermissions } from './utils/auth';
+import { getUserInfoAgain } from './services/configAPI/api';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
+
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
+/** 登录处理 */
+async function loginHandle(): Promise<{
+  settings?: Partial<LayoutSettings>;
+  currentUser?: API.CurrentUser;
+  loading?: boolean;
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  menuList: any
+}> {
+  const loginInfo = getLoginInfo();
+  const menuList = getMenuList();
+  if (loginInfo.token) {
+    return {
+      fetchUserInfo: loginInfo,
+      currentUser: loginInfo,
+      settings: defaultSettings as Partial<LayoutSettings>,
+      menuList,
+    };
+  }
+  return {
+    fetchUserInfo: undefined,
+    currentUser: undefined,
+    settings: defaultSettings as Partial<LayoutSettings>,
+    menuList: []
+  };
+
+}
+
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  menuList: any
 }> {
-  const fetchUserInfo = async () => {
-    try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
-      return msg.data;
-    } catch (error) {
-      history.push(loginPath);
-    }
-    return undefined;
-  };
-  // 如果不是登录页面，执行
-  const { location } = history;
-  if (location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
-    };
-  }
-  return {
-    fetchUserInfo,
-    settings: defaultSettings as Partial<LayoutSettings>,
-  };
+  return loginHandle().then((loginInfo) => {
+    return Object.assign({}, loginInfo);
+  });
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  const currentPermission = getLoginInfo().permissions;
+  useEffect(() => {
+    // 启动轮询
+    const intervalId = setInterval(async () => {
+      // console.log('轮询检查系统状态');
+      const { data } = await getUserInfoAgain(getLoginInfo().id)
+      localStorage.setItem('UserInfo', JSON.stringify({ ...data, name: data.nickname }));
+      initPermissions();
+      if(currentPermission!==data.permissions){
+        history.push('/home');
+        window.location.reload();
+      }
+    }, 3000); // 每10秒检查一次系统状态
+
+    // 清除定时器
+    return () => clearInterval(intervalId);
+  }, []);
+
+
   return {
-    // actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
@@ -72,6 +100,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);
+      }
+    },
+    menu: {
+      locale: false,
+
+      request: async () => {
+        return getMenuList();
       }
     },
     bgLayoutImgList: [

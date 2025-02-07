@@ -1,0 +1,3 @@
+.noPaginationTable :global .ant-pagination {
+  display: none;
+}

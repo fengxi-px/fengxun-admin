@@ -1,0 +1,10 @@
+.overrideUpload :global .ant-upload-list.ant-upload-list-picture-card .ant-upload.ant-upload-select {
+  width: 120px;
+  background-color: unset;
+  border: unset;
+}
+.overrideUpload :global .ant-upload-list.ant-upload-list-picture-card .ant-upload.ant-upload-select .text_upload {
+  color: #1890ff;
+  font-weight: 600;
+  font-size: 16px;
+}

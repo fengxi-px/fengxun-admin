@@ -1,7 +1,4 @@
-﻿import component from "@/locales/bn-BD/component";
-import { Breadcrumb } from "antd";
-
-/**
+﻿/**
  * @name umi 的路由配置
  * @description 只支持 path,component,routes,redirect,wrappers,name,icon 的配置
  * @param path  path 只支持两种占位符配置，第一种是动态参数 :id 的形式，第二种是 * 通配符，通配符只能出现路由字符串的最后。
@@ -21,7 +18,7 @@ export default [
       {
         name: 'login',
         path: '/user/login',
-        component: './User/Login',
+        component: './user/login',
       },
     ],
   },
@@ -36,19 +33,25 @@ export default [
     path: '/personalCenter',
     name: 'Personal Center',
     component: './personalCenter',
-    meta: { breadcrumb: true }
+    meta: { breadcrumb: true },
+    // wrappers: ['@/wrappers/AuthWrapper'],
+    access: 'canViewPersonalCenter',
   },
   {
     path: '/usersManagement',
     name: 'Users Management',
     component: './usersManagement',
-    meta: { breadcrumb: true }
+    meta: { breadcrumb: true },
+    // wrappers: ['@/wrappers/AuthWrapper'],
+    access: 'canViewUserManagement', // 使用 access.ts 里的权限
   },
   {
     path: '/usersManagement/detail',
     name: 'UserDetail',
     hideInMenu: true,
-    component: './usersManagement/detail'
+    component: './usersManagement/detail',
+    // wrappers: ['@/wrappers/AuthWrapper'],
+    access: 'canViewUserManagement',
   },
   {
     path: '/authorityManagement',
@@ -56,23 +59,42 @@ export default [
     routes: [
       {
         path: '/authorityManagement',
-        redirect: '/authorityManagement/users'
+        redirect: '/authorityManagement/users',
+        // wrappers: ['@/wrappers/AuthWrapper'],
+        access: 'canViewAuthorityManagement', // 使用 access.ts 里的权限
       },
       {
         path: '/authorityManagement/users',
         name: 'Users',
-        component: './authorityManagement/users'
+        component: './authorityManagement/users',
+        // wrappers: ['@/wrappers/AuthWrapper'],
+        access: 'canViewAuthorityManagement',
+      },
+      {
+        path: '/authorityManagement/users/detail',
+        name: 'UserDetail',
+        hideInMenu: true,
+        component: './authorityManagement/users/detail',
+        // wrappers: ['@/wrappers/AuthWrapper'],
+        access: 'canViewAuthorityManagement',
       },
       {
         path: '/authorityManagement/roles',
         name: 'Roles',
-        component: './authorityManagement/roles'
-      }
-    ]
+        component: './authorityManagement/roles',
+        // wrappers: ['@/wrappers/AuthWrapper'],
+        access: 'canViewAuthorityManagement',
+      },
+    ],
   },
   {
     path: '/',
     redirect: '/home',
+  },
+  {
+    path: '/403',
+    layout: false,
+    component: './403',
   },
   {
     path: '*',

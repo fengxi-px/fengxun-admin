@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { getLoginInfo } from '@/utils/userInfo';
 import { setLocale } from '@umijs/max';
 import { Card } from 'antd';
 import React, { useEffect } from 'react';
@@ -7,10 +8,8 @@ import React, { useEffect } from 'react';
 
 
 const Welcome: React.FC = () => {
-    // const logonInfo = getLoginInfo();
-    // useEffect(() => {
-    //     setLocale('en-US', false);
-    // }, [])
+    const logonInfo = getLoginInfo();
+    console.log(logonInfo);
 
 
     return (
@@ -25,7 +24,7 @@ const Welcome: React.FC = () => {
                             fontWeight: '500',
                             display: 'inline-block',
                             marginRight: ' 50px'
-                        }}>Hi，Alex</span>
+                        }}>Hi，{logonInfo.name}</span>
                         {/* }}>Hi，{logonInfo.name}</span> */}
                     </span>
                     <span>

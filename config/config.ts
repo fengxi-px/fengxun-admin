@@ -8,6 +8,14 @@ import routes from './routes';
 const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
+  history: {
+    type: 'hash',  // 设置为 hash 模式
+  },
+  favicons: [
+    '/favicon.ico',
+    'https://imgbed.yiyunt.cn/img/1654'
+  ],
+
   /**
    * @name 开启 hash 模式
    * @description 让 build 之后的产物包含 hash 后缀。通常用于增量发布和避免浏览器加载缓存。
@@ -54,7 +62,14 @@ export default defineConfig({
    * @doc 代理介绍 https://umijs.org/docs/guides/proxy
    * @doc 代理配置 https://umijs.org/docs/api/config#proxy
    */
-  proxy: proxy[REACT_APP_ENV as keyof typeof proxy],
+  // proxy: proxy[REACT_APP_ENV as keyof typeof proxy],
+  proxy: {
+    '/api': {
+      target: 'https://imgbed.yiyunt.cn',
+      changeOrigin: true,
+      // pathRewrite: { '^/api': '' },
+    },
+  },
   /**
    * @name 快速热更新配置
    * @description 一个不错的热更新组件，更新时可以保留 state
@@ -78,7 +93,7 @@ export default defineConfig({
    */
   title: 'Ant Design Pro',
   layout: {
-    locale: true,
+    locale: false,
     ...defaultSettings,
   },
   /**
