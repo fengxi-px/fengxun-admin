@@ -13,8 +13,6 @@ import { getMenuList, initPermissions } from './utils/auth';
 import { getUserInfoAgain } from './services/configAPI/api';
 import { Dropdown, Menu, Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
-import { get } from 'lodash';
-const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
 

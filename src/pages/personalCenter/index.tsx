@@ -31,14 +31,6 @@ import { UploadOutlined } from '@ant-design/icons';
 import './index.less'
 import secondConfirm from '@/utils/secondConfirm';
 
-const mockData = {
-  name: 'John Doe',
-  avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-  role: 'Admin',
-  email: 'test@qq.com',
-  phone: '123456789',
-};
-
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
