@@ -39,7 +39,6 @@ export async function findUserWebByTime(startTime: any, endTime: any) {
   });
 }
 export async function findUserWeb(data: any) {
-  console.log('data', data);
   return request(`${defaultUrl}/findUserWeb`, {
     method: 'GET',
     params: { ...data },

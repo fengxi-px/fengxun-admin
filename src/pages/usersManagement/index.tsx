@@ -126,7 +126,6 @@ const UsersManagement = () => {
     let flag = false;
     if(permission){
      permission.forEach((item: any) => {
-      console.log('item', item)
       if(item.path===('/usersManagement')){
         flag = item.canWrite;
       }
@@ -144,7 +143,6 @@ const UsersManagement = () => {
   const getList = async (page = 1, size = 10, params = {}) => {
     let data = [];
     if (params) {
-      console.log('params', params)
       const requestParams = {
         id: params.id,
         email: params.email,

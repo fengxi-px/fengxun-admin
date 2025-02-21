@@ -3,14 +3,17 @@ import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { ProBreadcrumb, SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
+import { history, Link, useLocation } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getLoginInfo } from './utils/userInfo';
 import { getMenuList, initPermissions } from './utils/auth';
 import { getUserInfoAgain } from './services/configAPI/api';
+import { Dropdown, Menu, Tabs } from 'antd';
+import TabPane from 'antd/es/tabs/TabPane';
+import { get } from 'lodash';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -57,8 +60,10 @@ export async function getInitialState(): Promise<{
   });
 }
 
+
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  // 轮询检查用户信息
   const currentPermission = getLoginInfo().permissions;
   useEffect(() => {
     // 启动轮询
@@ -77,6 +82,142 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     return () => clearInterval(intervalId);
   }, []);
 
+  // 页签
+  const location = useLocation();
+  const [activeKey, setActiveKey] = useState(location.pathname);
+  const [panes, setPanes] = useState(JSON.parse(localStorage.getItem('panes'))||[
+    { title: 'Home', key: '/home', content: null, path: '/home' }
+  ]);
+  // 右键点击的 Tab
+  const [contextMenuTabKey, setContextMenuTabKey] = useState<string | null>(null); 
+
+  const getKey = () => {
+    // let pathKey = location.pathname;
+    // const params = new URLSearchParams(location.search);
+    // const id = params.get('id');
+    // if(id){
+    //   pathKey = pathKey + '?id=' + id
+    // }
+    // return pathKey
+    return (location.pathname+location.search)==='/'?'/home':(location.pathname+location.search);
+  }
+
+  useEffect(() => {
+    // 在页面加载时检查会话存储
+    if (sessionStorage.getItem('isRefreshed')) {
+      console.log('页面刷新');
+    } else {
+      console.log('首次加载或登录');
+      sessionStorage.setItem('isRefreshed', 'true');
+      localStorage.setItem('panes',JSON.stringify([]))
+      setPanes([
+        { title: 'Home', key: '/home', content: null, path: '/home' }
+      ])
+    }
+    const currentPath = location.pathname+location.search;
+    let pathKey = location.pathname+location.search
+    // let pathKey = getKey()
+
+    console.log(location.pathname,'name',location.search,'search')
+    
+
+    const capitalizeFirstLetter = (str: string): string => {
+      if (!str) return ''; // 如果字符串为空，返回空字符串
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+    
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    let title = capitalizeFirstLetter(pathSegments[pathSegments.length - 1]);
+    
+    if(title){
+      if(title === 'Detail'){
+        title = capitalizeFirstLetter(pathSegments[pathSegments.length - 2]) + title
+      }
+
+      const existingPane = panes.find((pane:any)=>pane.key === pathKey);
+      if (!existingPane) {
+        setPanes([...panes,{title,key:pathKey,content:null,path:currentPath}])
+        console.log(panes,'in')
+      }
+      localStorage.setItem('panes',JSON.stringify(panes))
+      console.log(panes,existingPane,getKey())
+    }
+    if(pathKey==='/'){
+      setActiveKey('/home');
+    }else{
+      setActiveKey(pathKey);
+    }
+  }, [location.pathname,location.search]);
+
+  const onChange = (key:any) => {
+    setActiveKey(key);
+    history.push(key);
+  };
+
+  const removeTab = (targetKey: string) => {
+    let newActiveKey = activeKey; // 当前激活的 Tab
+    let lastIndex = -1; // 用于记录被删除的 Tab 前一个的索引
+  
+    // 遍历所有 Tab，找到 targetKey 并记录前一个 Tab 的索引
+    panes.forEach((pane:any, i:any) => {
+      if (pane.key === targetKey) {
+        lastIndex = i - 1;
+      }
+    });
+  
+    // 过滤掉被删除的 Tab
+    const newPanes = panes.filter((pane:any) => pane.key !== targetKey);
+  
+    // 如果还有剩余的 Tab，处理激活的 Tab key
+    if (newPanes.length) {
+      if (newActiveKey === targetKey) {
+        // 如果删除的是当前激活的 Tab
+        newActiveKey = lastIndex >= 0 ? newPanes[lastIndex].key : newPanes[0].key;
+      }
+    } else {
+      // 如果删除后没有 Tab，则清空 activeKey
+      newActiveKey = '';
+    }
+    
+    setPanes(newPanes);
+    setActiveKey(newActiveKey);
+    // 导航到新的 activeKey，如果存在
+    if (newActiveKey) {
+      history.push(newActiveKey);
+    } else {
+      // 如果没有 Tab 剩余，可以导航到一个默认路径或留空
+      history.push('/home');
+    }
+  };
+
+  const handleMenuClick = ({ key }: { key: string }) => {
+    if (key === 'closeCurrent') {
+      removeTab(contextMenuTabKey!);
+    } else if (key === 'closeAll') {
+      setPanes([]);
+      setActiveKey('');
+      localStorage.setItem('panes',JSON.stringify([]))
+      history.push('/home');
+    } else if (key === 'closeOthers') {
+      localStorage.setItem('panes',JSON.stringify(panes.filter((pane:any) => pane.key === contextMenuTabKey)))
+      setPanes(panes.filter((pane:any) => pane.key === contextMenuTabKey));
+      setActiveKey(contextMenuTabKey!);
+    }
+    setContextMenuTabKey(null); // 隐藏菜单
+  };
+
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="closeCurrent">关闭当前页面</Menu.Item>
+      <Menu.Item key="closeAll">关闭所有页面</Menu.Item>
+      <Menu.Item key="closeOthers">关闭除当前页面外的其他页面</Menu.Item>
+    </Menu>
+  );
+
+  const onContextMenu = (e: React.MouseEvent, key: string) => {
+    e.preventDefault(); // 禁止默认的右键菜单
+    setContextMenuTabKey(key); // 设置右键点击的 Tab Key
+  };
 
   return {
     avatarProps: {
@@ -129,40 +270,34 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         width: '331px',
       },
     ],
-    // links: isDev
-    //   ? [
-    //     <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-    //       <LinkOutlined />
-    //       <span>OpenAPI 文档</span>
-    //     </Link>,
-    //   ]
-    //   : [],
     menuHeaderRender: undefined,
-    // 自定义 403 页面
-    // unAccessible: <div>unAccessible</div>,
-    // 增加一个 loading 的状态
-    // childrenRender: (children) => {
-    //   // if (initialState?.loading) return <PageLoading />;
-    //   return (
-    //     <>
-    //       {children}
-    //       {isDev && (
-    //         <SettingDrawer
-    //           disableUrlParams
-    //           enableDarkTheme
-    //           settings={initialState?.settings}
-    //           onSettingChange={(settings) => {
-    //             setInitialState((preInitialState) => ({
-    //               ...preInitialState,
-    //               settings,
-    //             }));
-    //           }}
-    //         />
-    //       )}
-    //     </>
-    //   );
-    // },
     ...initialState?.settings,
+    childrenRender: (children) => (
+      <Tabs
+      hideAdd
+      onChange={onChange}
+      activeKey={activeKey}
+      type="editable-card"
+      onEdit={(targetKey, action) => {
+        if (action === 'remove') removeTab(targetKey as string);
+      }}
+    >
+      {panes.map((pane:any) => (
+        <TabPane
+          tab={
+            <Dropdown overlay={menu} trigger={['contextMenu']}>
+              <span onContextMenu={(e) => onContextMenu(e, pane.key)}>
+                {pane.title}
+              </span>
+            </Dropdown>
+          }
+          key={pane.key}
+        >
+          {pane.key === (getKey()) ? children : pane.content}
+        </TabPane>
+      ))}
+    </Tabs>
+    ),
   };
 };
 

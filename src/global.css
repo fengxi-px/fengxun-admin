@@ -199,3 +199,9 @@ ol {
   text-overflow: ellipsis;
   white-space: normal;
 }
+.noPaginationTable .ant-pagination {
+  display: none;
+}
+.inerTableBox {
+  overflow: auto;
+}

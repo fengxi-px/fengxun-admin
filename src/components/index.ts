@@ -11,5 +11,6 @@ import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
 import PCard from './Card';
 import Ptable from './Table';
 import PageLoading from './PageLoading';
+import BatchUpload from './UpdateFile';
 
-export { Footer, Question, SelectLang, AvatarDropdown, AvatarName, PCard, Ptable, PageLoading };
+export { Footer, Question, SelectLang, AvatarDropdown, AvatarName, PCard, Ptable, PageLoading, BatchUpload };

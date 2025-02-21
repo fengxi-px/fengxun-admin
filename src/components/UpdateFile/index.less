@@ -1,0 +1,171 @@
+/* BatchUpload.less */
+@primary-color: #2e3b4e;  /* 深蓝色 */
+@secondary-color: #fff; /* 黑色 */
+@button-hover-color: #4e73b1; /* 按钮悬停的蓝色 */
+@remove-btn-color: #f44336; /* 删除按钮颜色 */
+@text-color: #f0f0f0;  /* 白色文本 */
+@loading-color: #ffa500; /* 橙色 */
+@success-color: #4caf50; /* 绿色 */
+@failed-color: #f44336; /* 红色 */
+
+/* 主容器 */
+.batch-upload {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: @secondary-color;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: @text-color;
+}
+
+/* 标题 */
+.upload-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  color: @text-color;
+}
+
+/* 文件选择输入框 */
+
+.file-input-wrapper {
+    position: relative;
+  }
+  
+  .file-input {
+    opacity: 0; /* 隐藏原生的文件输入框 */
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 100%;
+    cursor: pointer; /* 鼠标悬停时显示为手形 */
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    margin-left: 25%;
+    padding: 10px 20px;
+    background-color: @primary-color;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    width: 50%;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: @button-hover-color;
+  }
+// .file-input {
+//   display: block;
+//   opacity: 0;
+//   margin: 0 auto;
+//   padding: 10px;
+//   background-color: @primary-color;
+//   color: @text-color;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+// }
+
+// .file-input:hover {
+//   background-color: @button-hover-color;
+// }
+
+
+
+/* 图片预览区 */
+.image-preview {
+  margin-top: 20px;
+}
+
+.preview-list {
+  list-style: none;
+  padding: 0;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.preview-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.file-info {
+  flex-grow: 1;
+}
+
+.status-text {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.loading {
+  color: @loading-color;
+}
+
+.success {
+  color: @success-color;
+}
+
+.failed {
+  color: @failed-color;
+}
+
+.waiting {
+  color: #757575; /* 灰色 */
+}
+
+.remove-btn {
+  background-color: transparent;
+  color: @remove-btn-color;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* 上传按钮 */
+.upload-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: @primary-color;
+  color: @text-color;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.upload-btn:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.upload-btn:hover {
+  background-color: @button-hover-color;
+}

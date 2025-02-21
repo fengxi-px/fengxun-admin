@@ -12,7 +12,7 @@ const PCard = (props: any) => {
     const { children, title, showEdit = false, handleEdit, showAdd = false, handleAdd, showUpdate = false, handleUpdate, updateTtile = 'Update Salesperson' } = props
     return (
         // <Card style={{ marginBottom: '10px' }}>
-        <Card>
+        <Card style={{width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <span style={{ fontSize: '20px' }}>{title}</span>
                 {

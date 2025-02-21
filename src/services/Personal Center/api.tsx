@@ -16,4 +16,22 @@ export async function updateUser(id: any, data: any) {
         data
     });
 }
+export async function addFile(data: any) {
+    return request(`${defaultUrl}/addFile`, {
+        method: 'POST',
+        data
+    });
+}
+export async function getFilesByOwner(owner: any) {
+    return request(`${defaultUrl}/getFiles`, {
+        method: 'GET',
+        params: { owner }
+    });
+}
+export async function deleteFile(id: any) {
+    return request(`${defaultUrl}/deleteFile`, {
+        method: 'DELETE',
+        params: { id }
+    });
+}
 

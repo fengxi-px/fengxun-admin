@@ -72,6 +72,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
         });
         localStorage.removeItem('UserInfo');
         localStorage.removeItem('permissions');
+        localStorage.removeItem('panes');
         loginOut();
         return;
       }
