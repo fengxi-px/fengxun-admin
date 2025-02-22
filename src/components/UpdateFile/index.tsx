@@ -191,7 +191,7 @@ const BatchUpload: React.FC<BatchUploadProps> = ({ email ,isReset}) => {
             className="file-input"
         />
         <label htmlFor="file-upload" className="custom-file-upload">
-            选择文件
+          Please select the file
         </label>
       </div>
 
@@ -233,7 +233,9 @@ const BatchUpload: React.FC<BatchUploadProps> = ({ email ,isReset}) => {
         onClick={handleUpload}
         disabled={fileList.length === 0}
       >
-        上传 {count.current} 张图片
+        {
+          count.current === 0 ? 'Upload' : count.current === 1 ? `Uploade ${count.current} image` : `Uploading ${count.current} images`
+        }
       </button>
     </div>
   );

@@ -2,19 +2,15 @@
 import { defineConfig } from '@umijs/max';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
-import proxy from './proxy';
 import routes from './routes';
 
 const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   history: {
-    type: 'hash',  // 设置为 hash 模式
+    type: 'hash', // 设置为 hash 模式
   },
-  favicons: [
-    '/favicon.ico',
-    'https://imgbed.yiyunt.cn/img/1654'
-  ],
+  favicons: ['/favicon.ico', 'https://imgbed.yiyunt.cn/img/1654'],
 
   /**
    * @name 开启 hash 模式

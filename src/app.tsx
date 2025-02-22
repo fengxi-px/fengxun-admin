@@ -116,7 +116,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     let pathKey = location.pathname+location.search
     // let pathKey = getKey()
 
-    console.log(location.pathname,'name',location.search,'search')
+    // console.log(location.pathname,'name',location.search,'search')
     
 
     const capitalizeFirstLetter = (str: string): string => {
@@ -135,10 +135,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       const existingPane = panes.find((pane:any)=>pane.key === pathKey);
       if (!existingPane) {
         setPanes([...panes,{title,key:pathKey,content:null,path:currentPath}])
-        console.log(panes,'in')
+        // console.log(panes,'in')
       }
       localStorage.setItem('panes',JSON.stringify(panes))
-      console.log(panes,existingPane,getKey())
+      // console.log(panes,existingPane,getKey())
     }
     if(pathKey==='/'){
       setActiveKey('/home');
@@ -206,9 +206,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="closeCurrent">关闭当前页面</Menu.Item>
-      <Menu.Item key="closeAll">关闭所有页面</Menu.Item>
-      <Menu.Item key="closeOthers">关闭除当前页面外的其他页面</Menu.Item>
+      <Menu.Item key="closeCurrent">Close the current page</Menu.Item>
+      <Menu.Item key="closeAll">Close all pages</Menu.Item>
+      <Menu.Item key="closeOthers">Close all pages except the current page</Menu.Item>
     </Menu>
   );
 
